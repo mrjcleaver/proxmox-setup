@@ -1,0 +1,5 @@
+= proxmox-setup
+
+Generate this with
+    proxmox-setup rdoc
+After you have described your command line interface

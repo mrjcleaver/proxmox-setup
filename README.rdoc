@@ -1,0 +1,6 @@
+= proxmox-setup
+
+Describe your project here
+
+:include:proxmox-setup.rdoc
+
