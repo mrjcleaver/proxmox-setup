@@ -8,19 +8,15 @@ ENV['GLI_DEBUG']='true'
 # Only tested on a Mac
 @log='setup.log'
 
-#$: << File.expand_path(File.join(File.dirname(__FILE__),'..','..','..','lib'))
-#$: << File.expand_path(File.join(File.dirname(__FILE__),'..','lib'))
+$: << File.expand_path(File.join(File.dirname(__FILE__),'..','..','..','lib'))
+$: << File.expand_path(File.join(File.dirname(__FILE__),'..','lib'))
 
 begin # XXX: Remove this begin/rescue before distributing your app
-  #lib = '../lib/proxmox-setup.rb'
-  lib = 'proxmox-setup.rb'
-# require lib
-  #require_relative lib
-
-  require '/Volumes/Storage/martincleaver/SoftwareDevelopment/proxmox-setup/lib/proxmox-setup.rb'
+  lib = '../lib/proxmox-setup.rb'
+  require_relative lib
 
 rescue LoadError
-  STDERR.puts "Couldn't find proxmox-setup.rb"
+  STDERR.puts "Couldn't find #{lib}"
   STDERR.puts $LOAD_PATH
   STDERR.puts "In development, you need to use `bundle exec bin/proxmox-setup` to run your app"
   STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"

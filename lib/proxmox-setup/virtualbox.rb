@@ -12,7 +12,7 @@ def make_proxmox_vm(vm)
   ram_mb="3072"
 
   unless(File.file?(@install_iso))
-    raise "ERROR - you need to down load the ISO file at #{@install_iso}"
+    raise "ERROR - you need to download the ISO file at #{@install_iso} from https://www.proxmox.com/downloads"
   end
 
   ide_storage_name="IDE Controller for #{vm}"
