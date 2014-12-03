@@ -6,7 +6,7 @@
 
 def make_proxmox_vm(vm)
   # * Disk: Use a SSD if possible. Preallocated might provide faster access.
-  hd_file="/Volumes/Mavericks\ on\ SSD/VirtualBoxDisksOnSSD/#{vm}-HD.vdi"
+  hd_file=@disk_folder+"/#{vm}-HD.vdi"
   hd_on_ssd="on"
   hd_size_mb="20000" # 10,000 = 10GB
   ram_mb="3072"
@@ -40,23 +40,7 @@ def start_proxmox_vm(vm)
   run_shell_cmd("VBoxManage startvm '#{vm}' ")
 end
 
-def setup_defaults()
-  # NOTE! Lots of code also available for inspiration in
-  # /Applications/Vagrant/embedded/gems/gems/vagrant-1.6.5/plugins/providers/virtualbox/driver/version_4_3.rb
 
-  #@install_iso="proxmox-ve_3.2-5a885216-5.iso"
-  @install_iso="proxmox-ve_3.3-a06c9f73-2.iso"
-
-  @wifi_bridge="en1: Wi-Fi (AirPort)"
-  @nat_net_cidr="192.168.11.0/24"
-  @nat_net_gateway="192.168.11.2"
-  @nat_net_dns="192.168.11.3"
-
-  @hostonly_network_ip="192.168.4.1"
-  @hostonly_gateway="192.168.4.2"
-  @container_network_cidr="192.168.9.0/24"
-  @container_network_vmbr_ip="192.168.9.1"
-end
 
 
 
