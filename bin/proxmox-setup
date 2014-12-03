@@ -83,12 +83,13 @@ command :virtualbox_start do |c|
 end
 
 def ip_for_vm(callthis)
+  # need a lamda here
   if (options[:ip])
-    (options[:ip])
+    callthis(options[:ip])
   else
     ip = ensure_got_ip_of_proxmox(options[:vm])
     if (ip)
-      &callthis(ip)
+      callthis(ip)
     else
       raise "No valid IP address findable for "+options[:vm]
     end
