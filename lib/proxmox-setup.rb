@@ -3,7 +3,7 @@ require 'proxmox-setup/version.rb'
 # Add requires for other files you add to your project here, so
 # you just need to require this one file in your bin file
 
-
+require 'proxmox-setup/defaults'
 require 'proxmox-setup/ip-of-virtualbox.rb'
 require 'proxmox-setup/virtualbox.rb'
 require 'proxmox-setup/shell.rb'
