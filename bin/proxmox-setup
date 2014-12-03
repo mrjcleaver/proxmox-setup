@@ -88,7 +88,7 @@ def ip_for_vm(callthis)
   else
     ip = ensure_got_ip_of_proxmox(options[:vm])
     if (ip)
-      callthis(ip)
+      &callthis(ip)
     else
       raise "No valid IP address findable for "+options[:vm]
     end
@@ -102,7 +102,16 @@ command :sshkeys do |c|
   c.flag :ip
 
   c.action do |global_options,options,args|
-    ip_for_vm(install_ssh_key)
+    if (options[:ip])
+      install_ssh_key(options[:ip])
+    else
+      ip = ensure_got_ip_of_proxmox(options[:vm])
+      if (ip)
+        install_ssh_key(ip)
+      else
+        raise "No valid IP address findable for "+options[:vm]
+      end
+    end
     puts "ssh-keys command ran"
   end
 end
