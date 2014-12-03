@@ -1,0 +1,5 @@
+#!/bin/bash
+
+.  /etc/pve/nodes/proxmox-mm/openvz/talk-to-ct.sh &
+disown
+exit 0
