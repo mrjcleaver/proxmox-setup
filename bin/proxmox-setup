@@ -87,6 +87,9 @@ def ip_for_vm(callthis)
   if (options[:ip])
     callthis(options[:ip])
   else
+    if (!options[:vm])
+      raise "You must specify either -vm or -ip"
+    end
     ip = ensure_got_ip_of_proxmox(options[:vm])
     if (ip)
       callthis(ip)
