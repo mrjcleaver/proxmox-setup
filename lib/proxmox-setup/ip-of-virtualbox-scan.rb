@@ -7,9 +7,10 @@ def register_ip_of_proxmox(vm, ip)
 end
 
 
-def get_ip_of_proxmox(vm)
+
+
+def scan_for_ip_of_proxmox(vm)
   if @vm_to_ip[vm]
-  then
     puts "returning cached"
     return @vm_to_ip[vm]
   else

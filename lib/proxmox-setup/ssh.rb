@@ -1,21 +1,24 @@
-def ensure_got_ip_of_proxmox(vm_or_ip)
-  if (!vm_or_ip.include?('.'))
-    puts "Didn't get an IP, getting from #{vm}"
-  else
-    ip=vm_or_ip
-    puts "IP=#{ip}"
-    return ip
-  end
-  ip = get_ip_of_proxmox(vm)
-  if (!ip.include?('.'))
-    puts "Didn't get an IP for #{vm}, aborting"
-    exit 1
-  else
-    puts "IP=#{ip}"
+include GLI::App
+require 'proxmox-setup.rb'
+
+desc 'Installs your ssh-key to the root account of the PVE'
+arg_name 'Describe arguments to ssh-keys here'
+command 'ssh-install-keys'do |c|
+  c.flag :vm
+  c.flag :ip
+
+  c.action do |global_options,options,args|
+
+
+    install_ssh_key(options)
+    puts "ssh-keys command ran"
   end
 end
 
-def install_ssh_key(ip)
+
+
+def install_ssh_key(options)
+  ip = find_pve(options)
   ensure_got_ask_pass()
   #http://www.noah.org/wiki/Category:SSH
   ssh_opts = '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o BatchMode=no  -o ConnectTimeout=10'

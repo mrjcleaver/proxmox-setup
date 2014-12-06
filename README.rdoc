@@ -1,6 +1,6 @@
 = proxmox-setup
 
-Describe your project here
+Desciption of project would presumably automatically get generated here if not for https://github.com/davetron5000/gli/issues/204
 
 :include:proxmox-setup.rdoc
 

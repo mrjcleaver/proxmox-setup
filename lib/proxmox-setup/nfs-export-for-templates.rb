@@ -1,3 +1,17 @@
+include GLI::App
+
+desc 'Mount NFS locations for backups etc.'
+arg_name 'Describe arguments to mountnfs here'
+command 'mount-nfs' do |c|
+  c.flag :ip
+
+  c.action do |global_options,options,args|
+    mount_nfs(options)
+    puts "mount-nfs command ran"
+  end
+end
+
+
 def export_nfs_for_templates
   puts "NFS Exports on your mac"
   run_shell_cmd("cat /etc/exports")
@@ -7,15 +21,14 @@ def export_nfs_for_templates
 end
 
 
-def mount_nfs(ip)
-  storageName = 'Backups'
-  exportedMountPoint = '/Volumes/Storage/martincleaver/ProxmoxBackups'
-  cmd = "pvesh create /storage -server '#{ip}' -storage #{storageName} \
-                                  -export #{exportedMountPoint} \
-                                  -content 'images' -type 'nfs'
+def mount_nfs(options)
+  ip = find_pve(options)
+  cmd = "pvesh create /storage -server '#{@storageServerIP}' -storage #{@storageName} \
+                                  -export #{@exportedMountPoint} \
+                                  -content 'images' -type 'nfs' -options 'vers=3'
 "
   proxmox_ssh(ip, cmd)
-# -options 'vers=3'
+
   # http://forum.proxmox.com/threads/20467-pvesh-set-storage-issues?p=104418#post104418
 end
 

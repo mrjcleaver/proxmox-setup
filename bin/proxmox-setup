@@ -11,23 +11,19 @@ ENV['GLI_DEBUG']='true'
 $: << File.expand_path(File.join(File.dirname(__FILE__),'..','..','..','lib'))
 $: << File.expand_path(File.join(File.dirname(__FILE__),'..','lib'))
 
-begin # XXX: Remove this begin/rescue before distributing your app
-  lib = '../lib/proxmox-setup.rb'
-  require_relative lib
-
-rescue LoadError
-  STDERR.puts "Couldn't find #{lib}"
-  STDERR.puts $LOAD_PATH
-  STDERR.puts "In development, you need to use `bundle exec bin/proxmox-setup` to run your app"
-  STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
-  STDERR.puts "(This message in bin/proxmox-setup)"
-  exit 64
-end
+lib = '../lib/proxmox-setup.rb'
+require_relative lib
 
 include GLI::App
 
-program_desc 'Setup Proxmox in various interesting ways, in Virtualbox etc.
-    Typically: virtualbox_install, sshkeys, uploadtemplates, mountnfs, containermount
+
+setup_defaults("./my.defaults.rb")
+#a Ruby file is simpler at this point than GLI's config_file
+
+program_desc 'Setup Proxmox in various interesting ways, in Virtualbox etc.'
+
+program_long_desc 'Setup Proxmox in various interesting ways, in Virtualbox etc.
+    Typically: virtualbox-install, virtualbox-start ssh-keys, upload-templates, mount-nfs, container-mount
 '
 
 version ProxmoxSetup::VERSION
@@ -35,134 +31,17 @@ version ProxmoxSetup::VERSION
 subcommand_option_handling :normal
 arguments :strict
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+#desc 'Describe some switch here'
+#switch [:v,:verbose]
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
+desc 'IP address of your Proxmox server (set with $PVE)'
+arg_name 'ip-address'
+flag [:ip]
+default_value(env_pve_value)
 
-desc 'virtualbox-install - create a virtualbox install'
+desc 'VBox VM name of your Proxmox server'
 arg_name 'vm'
-command :virtualbox_install do |c|
-  c.desc 'virtualbox vm name'
-  c.flag :vm, :required => true
-
-  c.action do |global_options,options,args|
-    puts "#{options}"
-    # Your command logic here
-    setup_defaults()
-    make_single_bridged_node(options[:vm])
-
-
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
-
-    puts "virtualbox-install command ran"
-    puts "Now boot your proxmox using virtualbox_start"
-    puts "Don't forget to eject the ISO when it's finished"
-  end
-end
-
-desc 'virtualbox_start - start the virtualbox'
-arg_name 'vm'
-command :virtualbox_start do |c|
-  c.desc 'virtualbox vm name'
-  c.flag :vm, :required => true
-
-  c.action do |global_options,options,args|
-    puts "#{options}"
-    # Your command logic here
-
-    start_proxmox_vm(options[:vm])
-
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
-
-    puts "virtualbox_start command ran"
-  end
-end
-
-def ip_for_vm(callthis)
-  # need a lamda here
-  if (options[:ip])
-    callthis(options[:ip])
-  else
-    if (!options[:vm])
-      raise "You must specify either -vm or -ip"
-    end
-    ip = ensure_got_ip_of_proxmox(options[:vm])
-    if (ip)
-      callthis(ip)
-    else
-      raise "No valid IP address findable for "+options[:vm]
-    end
-  end
-end
-
-desc 'Describe ssh-keys here'
-arg_name 'Describe arguments to ssh-keys here'
-command :sshkeys do |c|
-  c.flag :vm
-  c.flag :ip
-
-  c.action do |global_options,options,args|
-    if (options[:ip])
-      install_ssh_key(options[:ip])
-    else
-      if (!options[:vm])
-        raise "You must specify either --vm or --ip"
-      end
-      ip = ensure_got_ip_of_proxmox(options[:vm])
-      if (ip)
-        install_ssh_key(ip)
-      else
-        raise "No valid IP address findable for "+options[:vm]
-      end
-    end
-    puts "ssh-keys command ran"
-  end
-end
-
-
-desc 'Mount NFS locations for backups etc.'
-arg_name 'Describe arguments to mountnfs here'
-command :mountnfs do |c|
-  c.flag :ip, :required => true
-
-  c.action do |global_options,options,args|
-    mount_nfs(options[:ip])
-    puts "mount-nfs command ran"
-  end
-end
-
-
-desc 'Upload templates'
-arg_name 'Describe arguments to uploadtemplates here'
-command :uploadtemplates do |c|
-  c.flag :ip, :required => true
-
-  c.action do |global_options,options,args|
-    upload_templates(options[:ip])
-    puts "uploadtemplates command ran"
-  end
-end
-
-
-desc 'Add a pre-script to each container'
-arg_name 'Provide folder of scripts '
-command 'container-mount' do |c|
-  c.flag :ip, :required => true
-
-  c.action do |global_options,options,args|
-
-    container_mount(options[:ip])
-
-    puts "ssh-keys command ran"
-  end
-end
-
+flag [:vm]
 
 pre do |global,command,options,args|
   # Pre logic here
@@ -186,3 +65,4 @@ on_error do |exception|
 end
 
 exit run(ARGV)
+
