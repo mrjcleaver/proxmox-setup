@@ -42,3 +42,9 @@ Rake::TestTask.new do |t|
 end
 
 task :default => [:test,:features]
+
+task :readme
+system("echo '````' > README.md")
+system("bin/proxmox-setup --help >> README.md")
+system("echo '````' >> README.md")
+
