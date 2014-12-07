@@ -1,21 +1,21 @@
-NAME
+ NAME
     proxmox-setup - Setup Proxmox in various interesting ways, in Virtualbox etc.
 
     Setup Proxmox in various interesting ways, in Virtualbox etc. Typically: virtualbox-install, virtualbox-start ssh-keys, upload-templates, mount-nfs, container-mount
 
-SYNOPSIS
+ SYNOPSIS
     proxmox-setup [global options] command [command options] [arguments...]
 
-VERSION
+ VERSION
     0.0.2
 
-GLOBAL OPTIONS
+ GLOBAL OPTIONS
     --help          - Show this message
     --ip=ip-address - IP address of your Proxmox server (set with $PVE) (default: none)
     --version       - Display the program version
     --vm=vm         - VBox VM name of your Proxmox server (default: 10.0.1.102)
 
-COMMANDS
+ COMMANDS
     check-pve          - Check PVE setup
     container-mount    - Adds a script to each container during mount. Used for e.g.
     find-pve           - Find the pve based on either --ip, --vm or ENV[PVE]
