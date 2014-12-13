@@ -1,5 +1,5 @@
 include GLI::App
-
+long_desc 'For motivation see http://jpmens.net/2012/11/28/bootstrapping-openvz-containers-in-proxmox-ve/'
 
 desc 'Adds a script to each container during mount. Used for e.g. '
 arg_name 'Provide folder of scripts '

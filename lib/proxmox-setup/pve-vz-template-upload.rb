@@ -14,7 +14,7 @@ end
 
 def upload_templates(options)
   vm = find_pve(options)
-  proxmox_scp(vm, "templates/debchef-7_7.0-i386.tar.gz", @open_vz_template_cache )
+  proxmox_scp(vm, @company_vz_template, @open_vz_template_cache )
 end
 
 

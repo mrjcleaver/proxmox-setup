@@ -1,3 +1,5 @@
+### THIS IS NOT COMPLETE. Use the version that calls the shell script
+
 #! /usr/bin/ruby
 #if [ -z "$1" ]; then
 #    echo "Usage: $0 virtualbox-name"

@@ -1,6 +1,4 @@
 def setup_defaults(defaults_file)
-  # NOTE! Lots of code also available for inspiration in
-  # /Applications/Vagrant/embedded/gems/gems/vagrant-1.6.5/plugins/providers/virtualbox/driver/version_4_3.rb
 
   # technically the right way to set up defaults is with config[:config_name], but it seems harder to then use.
   @disk_folder="/Volumes/Mavericks\ on\ SSD/VirtualBoxDisksOnSSD"
@@ -9,6 +7,14 @@ def setup_defaults(defaults_file)
   @hd_size_mb="20000" # 10,000 = 10GB
   @ram_mb="3072"
 
+  @storageServerIP = '10.0.1.2'
+  @storageName = 'Backups'
+  @exportedMountPoint = '/Volumes/Storage/martincleaver/ProxmoxBackups'
+
+  @company_vz_template = "templates/debchef-7_7.0-i386.tar.gz"
+  @open_vz_template_cache = '/var/lib/vz/template/cache/'
+
+## Experimental (not used)
   @wifi_bridge="en1: Wi-Fi (AirPort)"
   @nat_net_cidr="192.168.11.0/24"
   @nat_net_gateway="192.168.11.2"
@@ -19,11 +25,6 @@ def setup_defaults(defaults_file)
   @container_network_cidr="192.168.9.0/24"
   @container_network_vmbr_ip="192.168.9.1"
 
-  @storageServerIP = '10.0.1.2'
-  @storageName = 'Backups'
-  @exportedMountPoint = '/Volumes/Storage/martincleaver/ProxmoxBackups'
-
-  @open_vz_template_cache = '/var/lib/vz/template/cache/'
 
   if File.file?(defaults_file)
     $: << File.expand_path(Dir.pwd)

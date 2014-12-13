@@ -2,6 +2,44 @@ include GLI::App
 
 desc 'virtualbox-install - create a virtualbox install of Proxmox on this machine'
 arg_name 'vm'
+command 'virtualbox-install' do |c|
+  c.desc 'virtualbox vm name'
+  c.flag :vm, :required => true
+  c.switch :stable
+
+  c.action do |global_options,options,args|
+    puts "#{options}"
+    # Your command logic here
+
+    if (options[:stable]) then
+      puts "WARNING: this functionality is broken, omit -stable to use bridged networking"
+      make_single_network_stable_node(options[:vm])
+    else
+      make_single_bridged_node(options[:vm])
+    end
+
+    puts "virtualbox-install command ran"
+    puts "Now boot your proxmox with the install ISO using 'virtualbox_start'"
+    puts "Don't forget to eject the ISO when it's finished installing"
+  end
+end
+
+desc 'virtualbox-start - start the virtualbox containing proxmox'
+arg_name 'vm'
+command 'virtualbox_start' do |c|
+  c.desc 'virtualbox vm name'
+  c.flag :vm, :required => true
+
+  c.action do |global_options,options,args|
+    puts "#{options}"
+
+    start_proxmox_vm(options[:vm])
+
+    puts "virtualbox_start command ran"
+  end
+end
+
+desc 'virtua'
 command :virtualbox_install do |c|
   c.desc 'virtualbox vm name'
   c.flag :vm, :required => true
@@ -10,34 +48,12 @@ command :virtualbox_install do |c|
     puts "#{options}"
     # Your command logic here
 
-    make_single_bridged_node(options[:vm])
+    make_single_network_stable_node(options[:vm])
 
-
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
 
     puts "virtualbox-install command ran"
     puts "Now boot your proxmox with the install ISO using 'virtualbox_start'"
     puts "Don't forget to eject the ISO when it's finished installing"
-  end
-end
-
-desc 'virtualbox_start - start the virtualbox'
-arg_name 'vm'
-command :virtualbox_start do |c|
-  c.desc 'virtualbox vm name'
-  c.flag :vm, :required => true
-
-  c.action do |global_options,options,args|
-    puts "#{options}"
-    # Your command logic here
-
-    start_proxmox_vm(options[:vm])
-
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
-
-    puts "virtualbox_start command ran"
   end
 end
 
@@ -56,6 +72,8 @@ def make_proxmox_vm(vm)
   # * Disk: Use a SSD if possible. Preallocated might provide faster access.
   hd_file=@disk_folder+"/#{vm}-HD.vdi"
 
+  # NOTE! Lots of code also available for inspiration in
+  # /Applications/Vagrant/embedded/gems/gems/vagrant-1.6.5/plugins/providers/virtualbox/driver/version_4_3.rb
 
 
   unless(File.file?(@install_iso))
@@ -101,9 +119,11 @@ end
   def make_single_bridged_node(vm)
     make_proxmox_vm(vm)
     make_vbox_nic_connect_to_bridge(vm, @wifi_bridge)
+    connect_vbox_adapter(vm, 1, 'bridge', @nat_net_cidr)
+
   end
 
-  def make_single_network_stable_node_NOT_IMPLEMENTED(vm)
+  def make_single_network_stable_node(vm)
     make_proxmox_vm(vm)
     #boot the vm - this will give the node its primary address from the default dhcp, i.e probably from wifi
 

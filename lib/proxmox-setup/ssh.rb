@@ -15,6 +15,25 @@ command 'ssh-install-keys'do |c|
   end
 end
 
+desc 'ssh to PVE'
+arg_name 'Describe arguments to ssh-keys here'
+command 'ssh'do |c|
+  c.flag :vm
+  c.flag :ip
+
+  c.action do |global_options,options,args|
+
+
+    pve_ssh(options, args)
+    puts "ssh-keys command ran"
+  end
+end
+
+def pve_ssh(options, args)
+  ip = find_pve(options)
+  cli = "ssh root@#{ip} "+args.join(' ')
+  puts run_shell_cmd(cli)
+end
 
 
 def install_ssh_key(options)
