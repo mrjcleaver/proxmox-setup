@@ -1,5 +1,5 @@
 
-def run_shell_cmd(cmd, monitor=false)
+def run_shell_cmd(cmd, monitor=@run_shell_cmd_monitor)
   puts "Running: #{cmd}"
   if (monitor != true) then
     filename = @log

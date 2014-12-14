@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    proxmox-setup (0.0.2)
+    proxmox-setup (0.0.3)
       gli (= 2.12.2)
 
 GEM

@@ -15,3 +15,5 @@ require 'proxmox-setup/pve-vz-template-upload.rb'
 require 'proxmox-setup/pve-vz-mount-shims.rb'
 require 'proxmox-setup/pve-run-ntp'
 require 'proxmox-setup/pve-web-browser.rb'
+
+require 'container-installers/chef-server.rb'

@@ -39,23 +39,6 @@ command 'virtualbox_start' do |c|
   end
 end
 
-desc 'virtua'
-command :virtualbox_install do |c|
-  c.desc 'virtualbox vm name'
-  c.flag :vm, :required => true
-
-  c.action do |global_options,options,args|
-    puts "#{options}"
-    # Your command logic here
-
-    make_single_network_stable_node(options[:vm])
-
-
-    puts "virtualbox-install command ran"
-    puts "Now boot your proxmox with the install ISO using 'virtualbox_start'"
-    puts "Don't forget to eject the ISO when it's finished installing"
-  end
-end
 
 
 #### ----------------------------------------------------------

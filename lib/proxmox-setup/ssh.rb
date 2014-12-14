@@ -29,6 +29,13 @@ command 'ssh'do |c|
   end
 end
 
+def ct_ssh(options, args)
+  ip = find_pve(options)
+  # TODO - allow CTID but not VM.
+  cli = "ssh root@#{ip} "+args
+  puts run_shell_cmd(cli)
+end
+
 def pve_ssh(options, args)
   ip = find_pve(options)
   cli = "ssh root@#{ip} "+args.join(' ')
