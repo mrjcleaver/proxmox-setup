@@ -1,6 +1,6 @@
 include GLI::App
 
-desc 'virtualbox-install - create a virtualbox install of Proxmox on this machine'
+desc 'create a virtualbox install of Proxmox on this machine'
 arg_name 'vm'
 command 'virtualbox-install' do |c|
   c.desc 'virtualbox vm name'
@@ -24,9 +24,9 @@ command 'virtualbox-install' do |c|
   end
 end
 
-desc 'virtualbox-start - start the virtualbox containing proxmox'
+desc 'start the virtualbox containing proxmox'
 arg_name 'vm'
-command 'virtualbox_start' do |c|
+command 'virtualbox-start' do |c|
   c.desc 'virtualbox vm name'
   c.flag :vm, :required => true
 
@@ -35,7 +35,7 @@ command 'virtualbox_start' do |c|
 
     start_proxmox_vm(options[:vm])
 
-    puts "virtualbox_start command ran"
+    puts "virtualbox-start command ran"
   end
 end
 

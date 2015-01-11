@@ -41,10 +41,12 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/*_test.rb']
 end
 
-task :default => [:test,:features]
+task :default => [:readme]
 
 task :readme
 system("echo '````' > README.md")
 system("bin/proxmox-setup --help >> README.md")
 system("echo '````' >> README.md")
+system("git add README.md")
+system("echo 'Updated README.md'")
 

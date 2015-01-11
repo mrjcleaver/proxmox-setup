@@ -30,6 +30,6 @@ COMMANDS
     ssh                - ssh to PVE
     ssh-install-keys   - Installs your ssh-key to the root account of the PVE
     upload-templates   - Upload OpenVZ template from templates/ to your PVEs Open VZ template folder
-    virtualbox-install - virtualbox-install - create a virtualbox install of Proxmox on this machine
-    virtualbox_start   - virtualbox-start - start the virtualbox containing proxmox
+    virtualbox-install - create a virtualbox install of Proxmox on this machine
+    virtualbox-start   - start the virtualbox containing proxmox
 ````
