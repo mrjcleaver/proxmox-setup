@@ -14,9 +14,11 @@ end
 
 def upload_templates(options)
   vm = find_pve(options)
-  proxmox_scp(vm, @company_vz_template, @open_vz_template_cache )
-  proxmox_ssh(vm, "cd /var/lib/vz/template/iso && wget http://releases.ubuntu.com/12.04.5/ubuntu-12.04.5-server-amd64.iso")
+  proxmox_scp(vm, @company_vz_template, '/var/lib/vz/template/cache/' )
+  #proxmox_ssh(vm, "cd /var/lib/vz/template/cache && wget http://download.openvz.org/template/precreated/debian-7.0-x86_64.tar.gz")
   proxmox_ssh(vm, "cd /var/lib/vz/template/cache && wget http://download.openvz.org/template/precreated/ubuntu-12.04-x86_64-minimal.tar.gz")
+  proxmox_ssh(vm, "cd /var/lib/vz/template/cache && wget http://download.openvz.org/template/precreated/ubuntu-12.04-x86_64-minimal.tar.gz")
+  proxmox_ssh(vm, "cd /var/lib/vz/template/iso && wget http://releases.ubuntu.com/12.04.5/ubuntu-12.04.5-server-amd64.iso")
   #http://download.openvz.org/template/precreated/
 end
 

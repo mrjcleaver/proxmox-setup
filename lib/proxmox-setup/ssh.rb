@@ -36,6 +36,13 @@ def ct_ssh(options, args)
   puts run_shell_cmd(cli)
 end
 
+def ct_scp(options, file, target)
+  ip = find_pve(options)
+  # TODO - allow CTID but not VM.
+  cli = "scp '#{file}' 'root@#{ip}:#{target}'"
+  run_shell_cmd(cli)
+end
+
 def pve_ssh(options, args)
   ip = find_pve(options)
   cli = "ssh root@#{ip} "+args.join(' ')
@@ -74,3 +81,7 @@ def proxmox_scp(vm, file, target)
   cli = "scp '#{file}' 'root@#{ip}:#{target}'"
   run_shell_cmd(cli)
 end
+
+
+#Future ideas:
+# http://askubuntu.com/questions/246323/why-does-sshs-password-prompt-take-so-long-to-appear

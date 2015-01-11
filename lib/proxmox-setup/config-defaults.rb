@@ -12,8 +12,7 @@ def setup_defaults(defaults_file)
   @exportedMountPoint = '/Volumes/Storage/martincleaver/ProxmoxBackups'
   @run_shell_cmd_monitor = false
 
-  @company_vz_template = "templates/debchef-7_7.0-i386.tar.gz"
-  @open_vz_template_cache = '/var/lib/vz/template/cache/'
+  @company_vz_templates = "templates/*.gz"
 
 ## Experimental (not used)
   @wifi_bridge="en1: Wi-Fi (AirPort)"

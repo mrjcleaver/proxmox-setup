@@ -146,6 +146,9 @@ end
     proxmox_ssh(vm, "pvesh set nodes/localhost/network/vmbr0 -address #{@container_network_vmbr_ip} -comments 'container network'")
 
     connect_to_private_network(vm, @nat_net_cidr)
+
+    # http://www.cyberciti.biz/faq/linux-list-network-cards-command/
+    # ip link show
   end
 
 
