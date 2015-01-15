@@ -44,7 +44,7 @@ end
 
 def ensure_got_ip_of_proxmox(vm_or_ip)
   if (!vm_or_ip.include?('.'))
-    puts "Didn't get an IP, getting from #{vm_or_ip}"
+    puts "Wasn't passed an IP, figuring out from #{vm_or_ip}"
   else
     ip=vm_or_ip
     puts "IP=#{ip}"

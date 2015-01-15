@@ -22,6 +22,9 @@ def scan_for_ip_of_proxmox(vm)
       ip = $1.to_s
       if ip.include?(".") then
         #puts "ip=#{ip}"
+        if ! ENV['PVE'] then
+          puts "Hint: export PVE=https://#{ip}:8006"
+        end
       else
         puts "Couldn't find proxmox vm #{vm} - is it booted?"
         puts run_shell_cmd("VBoxManage list runningvms")
@@ -30,7 +33,6 @@ def scan_for_ip_of_proxmox(vm)
     else
       puts "issue running ip-of-virtualbox.sh"
       exit 1
-
     end
     register_ip_of_proxmox(vm, ip)
     return ip

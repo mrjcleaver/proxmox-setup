@@ -12,7 +12,7 @@ def setup_defaults(defaults_file)
   @exportedMountPoint = '/Volumes/Storage/martincleaver/ProxmoxBackups'
   @run_shell_cmd_monitor = false
 
-  @company_vz_templates = "templates/*.gz"
+  @company_vz_templates = "/Volumes/Storage/martincleaver/ProxmoxTemplates/*.gz"
 
 ## Experimental (not used)
   @wifi_bridge="en1: Wi-Fi (AirPort)"

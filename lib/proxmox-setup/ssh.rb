@@ -72,7 +72,7 @@ end
 
 def proxmox_ssh(vm, cmd)
   ip = ensure_got_ip_of_proxmox(vm)
-  cli = "ssh root@#{ip} "+cmd
+  cli = "ssh root@#{ip} '"+cmd+"'"
   run_shell_cmd(cli)
 end
 
