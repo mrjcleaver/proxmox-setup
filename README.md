@@ -54,15 +54,15 @@ This utility helps you set up and work with your Proxmox Virtual Environment (PV
 It can also perform of Proxmox inside Virtualbox, or is also useful if your PVE is already set up.
 
 # CREATING a new PVE inside Virtualbox
-  bin/proxmox-setup virtualbox-install --vm px-in-vbox
+    bin/proxmox-setup virtualbox-install --vm px-in-vbox
 
 # returns the IP address
-  bin/proxmox-setup find-pve --vm px-in-vbox
+    bin/proxmox-setup find-pve --vm px-in-vbox
 (this will tell you PVE=...)
 
 # Passing ip is faster than forcing proxmox-setup to scan for the IP address
 # Let's save it so you don't need to keep passing it
-  export PVE=https://10.2.0.26:8006
+    export PVE=https://10.2.0.26:8006
 
 
 # WORKING WITH YOUR PVE
