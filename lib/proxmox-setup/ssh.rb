@@ -25,7 +25,7 @@ command 'ssh'do |c|
 
 
     pve_ssh(options, args)
-    puts "ssh-keys command ran"
+    puts "ssh command ran"
   end
 end
 

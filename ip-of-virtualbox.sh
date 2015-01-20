@@ -1,5 +1,5 @@
 #! /bin/sh
-MAX=20
+MAX=40
 if [ -z "$1" ]; then
     echo "Usage: $0 virtualbox-name <max>"
     echo "Searches arp for IP address of named vm"

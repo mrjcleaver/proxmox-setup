@@ -14,7 +14,7 @@ GLOBAL OPTIONS
     --help          - Show this message
     --ip=ip-address - IP address of your Proxmox server (set with $PVE) (default: none)
     --version       - Display the program version
-    --vm=vm         - VBox VM name of your Proxmox server (default: none)
+    --vm=vm         - VBox VM name of your Proxmox server (default: )
 
 COMMANDS
     check-pve          - Check PVE setup
@@ -31,6 +31,19 @@ COMMANDS
     upload-templates   - Upload OpenVZ template from templates/ to your PVEs Open VZ template folder
     virtualbox-install - create a virtualbox install of Proxmox on this machine
     virtualbox-start   - start the virtualbox containing proxmox
+
+INSTALLATION INSTRUCTIONS
+
+````
+git clone https://github.com/mrjcleaver/proxmox-setup.git
+gem install bundler
+bundle install
+````
+
+This should install all requirements.
+
+Only tested on Mac OS X
+
 ````
 This utility helps you set up and work with your Proxmox Virtual Environment (PVE).
 It can also perform of Proxmox inside Virtualbox, or is also useful if your PVE is already set up.

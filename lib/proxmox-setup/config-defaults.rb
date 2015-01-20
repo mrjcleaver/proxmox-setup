@@ -4,7 +4,7 @@ def setup_defaults(defaults_file)
   @disk_folder="/Volumes/Mavericks\ on\ SSD/VirtualBoxDisksOnSSD"
   @install_iso="proxmox-ve_3.3-a06c9f73-2.iso"
   @hd_on_ssd="on"
-  @hd_size_mb="20000" # 10,000 = 10GB
+  @hd_size_mb="10000" # 10,000 = 10GB
   @ram_mb="3072"
 
   @storageServerIP = '10.0.1.2'
@@ -31,6 +31,6 @@ def setup_defaults(defaults_file)
     require defaults_file
     # TODO - remove . from the LOAD_PATH
   else
-    puts "make your LOCAL OVERRIDING DEFAULTS file #{defaults_file}"
+    puts "make your LOCAL OVERRIDING DEFAULTS file #{defaults_file} (see config-defaults.rb)"
   end
 end

@@ -54,7 +54,12 @@ def chef_server_in_container(options, args)
   ct_ssh(options, 'chef gem install knife-backup')
   ct_ssh(options, "echo 'eval \"$(chef shell-init bash)\"' >> ~/.bash_profile")
 
-  ct_ssh(options, "knife configure initial --defaults -r ''")
+  #ct_ssh(options, "knife configure initial --defaults -r \'\'")
+
+  ip = options[:ip]
+  puts "Now you should ssh #{ip} knife configure initial --defaults -r \'\'"
+  puts "and "
+
 end
 
 def use_ip_for_chef_server(options, args)

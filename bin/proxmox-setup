@@ -24,6 +24,10 @@ program_desc 'Setup Proxmox in various interesting ways, in Virtualbox etc.'
 
 program_long_desc 'Setup Proxmox in various interesting ways, in Virtualbox etc.
     Typically: virtualbox-install, virtualbox-start ssh-keys, upload-templates, mount-nfs, container-mount
+
+REQUIREMENTS
+- An SSD with at least 10gb of free space
+- At least 8gb RAM
 '
 
 version ProxmoxSetup::VERSION

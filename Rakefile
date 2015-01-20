@@ -46,6 +46,9 @@ task :default => [:readme]
 task :readme
 system("echo '````' > README.md")
 system("bin/proxmox-setup --help >> README.md")
+system("echo >> README.md")
+system("cat INSTALL.md >> README.md")
+system("echo >> README.md")
 system("echo '````' >> README.md")
 system("cat USAGE.md >> README.md")
 system("git add README.md")

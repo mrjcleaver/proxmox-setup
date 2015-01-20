@@ -19,8 +19,8 @@ command 'virtualbox-install' do |c|
     end
 
     puts "virtualbox-install command ran"
-    puts "Now boot your proxmox with the install ISO using 'virtualbox_start'"
-    puts "Don't forget to eject the ISO when it's finished installing"
+    puts "Now boot your proxmox with the install ISO using 'virtualbox-start'"
+
   end
 end
 
@@ -45,6 +45,17 @@ end
 
 def start_proxmox_vm(vm)
   run_shell_cmd("VBoxManage startvm '#{vm}' ")
+  puts "Follow the on-screen prompts, e.g.:"
+  puts "1. press return at the boot prompt to accept defaults"
+  puts "2. accept the agreement"
+  puts "3. hit next"
+  puts "4. pick timezone, next"
+  puts "5. etc. next"
+  puts "6. pick proxmox.dev, let it take a DHCP address. next."
+  puts "wait...."
+  puts "7. Eject the ISO when it's finished installing (Devices Menu > CD/DVD Devices > Remove Disk from Drive), force"
+  puts "8. Click Reboot"
+  puts "wait...."
 end
 
 
@@ -101,8 +112,7 @@ end
   # NOTE: wlan bridging is not reliable, but
   def make_single_bridged_node(vm)
     make_proxmox_vm(vm)
-    make_vbox_nic_connect_to_bridge(vm, @wifi_bridge)
-    connect_vbox_adapter(vm, 1, 'bridge', @nat_net_cidr)
+    connect_vbox_adapter(vm, @wifi_bridge, 'bridged', @nat_net_cidr)
 
   end
 

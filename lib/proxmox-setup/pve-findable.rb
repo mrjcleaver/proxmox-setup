@@ -35,7 +35,7 @@ def env_pve_value
   if ENV['PVE'] then
     ENV['PVE'] =~ /https\:\/\/(.+)(\:8006)/
     ip = $1.to_s
-    #puts 'Found PVE in ENV ($PVE):'+ip
+    puts 'Found PVE in ENV ($PVE):'+ip
     return ip # return the IP out of PVE, might need to take account of PVE_NODE_NAME
   else
     return nil
