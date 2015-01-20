@@ -69,10 +69,11 @@ It can also perform of Proxmox inside Virtualbox, or is also useful if your PVE 
 
 # We want to be able to ssh in
 # This will add your ssh key (using ssh-copy-id) so you can ssh to the PVE
-bin/proxmox-setup ssh-install-keys
+    bin/proxmox-setup ssh-install-keys
 
 # Make sure it can talk to the internet, etc.
-bin/proxmox-setup check-pve
+    bin/proxmox-setup check-pve
+
 ````
 ~/SoftwareDevelopment/proxmox-setup 17:15:20 745$ bin/proxmox-setup check-pve
 IP=10.2.0.26
@@ -119,7 +120,7 @@ rtt min/avg/max/mdev = 58.657/58.657/58.657/0.000 ms
 
 
 # Proxmox is just a Debian box, let's take a look
- bin/proxmox-setup ssh uname -a
+
 ````
  746$ bin/proxmox-setup ssh uname -a
 Running: ssh root@10.2.0.26 uname -a
@@ -128,32 +129,32 @@ ssh-keys command ran
 ````
 
 # Now upload your favourite O/S templates  (Storage View > Data Center > proxmox > local > Content)
- bin/proxmox-setup upload-templates # IP address used from $PVE
+   bin/proxmox-setup upload-templates # IP address used from $PVE
 
 # Or I guess you could login too
- bin/proxmox-setup ssh vzctl enter 102
+   bin/proxmox-setup ssh vzctl enter 102
 
 # We like Chef. Let's install a chef server for us to use.
 # Here IP is the IP of the VM to use
- bin/proxmox-setup chefserver-install --ip=162.250.192.72
+   bin/proxmox-setup chefserver-install --ip=162.250.192.72
 
 # But Chef much prefers it is set up with a DNS name. We don't.
- bin/proxmox-setup chefserver-ip --ip=162.250.192.72
+   bin/proxmox-setup chefserver-ip --ip=162.250.192.72
 
 
 # To run chef-clients, the clock must be correct. All containers will inherit the PVE's time.
- bin/proxmox-setup pve-enable-ntp
+   bin/proxmox-setup pve-enable-ntp
 
 
 # Perhaps you want the Backups feature of PVE to work, and point to an NFS server somewhere on your LAN or laptop
 # You set the settings for this in your ./my.defaults.rb file.
- bin/proxmox-setup mount-nfs
+   bin/proxmox-setup mount-nfs
 
 # What if you want every container to run a certain script when starting?
-bin/proxmox-setup container-mount
+   bin/proxmox-setup container-mount
 
 # Lastly, we have $PVE set up, here's a trick to open your browser onto your PVE
-bin/proxmox-setup open-pve
+   bin/proxmox-setup open-pve
 
 
 
