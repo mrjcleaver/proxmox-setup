@@ -1,5 +1,4 @@
 ````
-make your LOCAL OVERRIDING DEFAULTS file ./my.defaults.rb (see config-defaults.rb)
 Found PVE in ENV ($PVE):10.2.0.24
 NAME
     proxmox-setup - Setup Proxmox in various interesting ways, in Virtualbox etc.
